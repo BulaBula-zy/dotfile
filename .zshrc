@@ -1,5 +1,6 @@
 # append $HOME/.local/bin to $PATH
-export PATH=$PATH:$HOME/.local/bin
+# export PATH=$PATH:$HOME/.local/bin
+export PATH=$HOME/.local/bin:$PATH
 
 # add llvm(clang/clang++/clangd) to $PATH
 export PATH=/opt/homebrew/opt/llvm/bin:$PATH
@@ -19,7 +20,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # add openjdk bin path to $PATH
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 # add openjdk include path to $CPPFLAGS
-export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
+# export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -141,8 +142,7 @@ source $ZSH/oh-my-zsh.sh
 export N_PREFIX="$HOME/n"; [[ :$PATH: == *":$N_PREFIX/bin:"* ]] || PATH+=":$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 
 # go
-export GO111MODULE=on
-export GOPROXY=https://goproxy.io,direct
+export GOBIN=$(go env GOPATH)/bin
 
 # obsidian
 export OBSIDIAN=/Users/bulabula/Library/Mobile\ Documents/iCloud\~md\~obsidian/Documents/
@@ -166,13 +166,13 @@ if command -v nvim &> /dev/null; then
 fi
 
 # vpn
-: "${ENABLE_PROXY:=true}"
-if [ "$ENABLE_PROXY" = "true" ]; then
-  # export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890 # ClashX
-  # export https_proxy=http://127.0.0.1:1087 http_proxy=http://127.0.0.1:1087 # V2rayU
-fi
+export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890 # ClashX
+# export https_proxy=http://127.0.0.1:1087 http_proxy=http://127.0.0.1:1087 # V2rayU
 
 # homebrew
+# export HOMEBREW_BREW_GIT_REMOTE=""
+# export HOMEBREW_CORE_GIT_REMOTE=""
+# export HOMEBREW_BOTTLE_DOMAIN=""
 eval "$(/opt/homebrew/bin/brew shellenv)"
 export HOMEBREW_BREW_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/brew.git"
 export HOMEBREW_CORE_GIT_REMOTE="https://mirrors.tuna.tsinghua.edu.cn/git/homebrew/homebrew-core.git"
@@ -201,7 +201,7 @@ fi
 
 # bat
 if command -v bat &> /dev/null; then
-  alias cat="bat --theme=Dracula" 
+  alias cat="bat --theme=Dracula --plain" 
 fi
 
 # duf
@@ -252,8 +252,11 @@ function yy() {
 eval "$(zoxide init zsh --cmd z)"
 
 # python
-export CURRENT_PYTHON_VERSION=3.12
-if command -v python${CURRENT_PYTHON_VERSION} &> /dev/null; then
-  alias python="python${CURRENT_PYTHON_VERSION}" 
-fi
-alias p="python"
+# export CURRENT_PYTHON_VERSION=3.12
+# if command -v python${CURRENT_PYTHON_VERSION} &> /dev/null; then
+#   alias python="python${CURRENT_PYTHON_VERSION}" 
+# fi
+alias p="python3"
+
+# make
+alias mk="make -j`nproc`"
